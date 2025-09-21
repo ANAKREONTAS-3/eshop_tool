@@ -6,10 +6,14 @@ import streamlit as st
 import openai
 from dotenv import load_dotenv
 
-# Φόρτωση .env (αν το έχεις)
+# Φόρτωση .env (αν τρεχεισ τοπικα) - στο Cloud αγνοειται
 load_dotenv()
-OPENAI_KEY = os.getenv("_ _")
 
+#Παιρνουμε το API key απο τα Secrets 
+OPENAI_KEY = os.getenv("OPEN_API_KEY")
+
+if not api_key:
+    st.error("Το OpenAI API key δεν βρεθηκε.Βεβαιωσου οτι το εχεισ βαλει στα Secret.")
 # Αν θέλεις για δοκιμή μπορείς προσωρινά να βάλεις το key εδώ:
 # OPENAI_KEY = "sk-...το_δικό_σου_key..."
 
@@ -20,14 +24,6 @@ st.set_page_config(page_title="E-shop AI Demo", page_icon="🛒", layout="center
 st.title("🛒 AI Content Generator για E-shop")
 st.write("Παράγει: περιγραφή προϊόντος, Instagram caption, Facebook post και hashtags.")
 
-# Sidebar: προαιρετικά το API key, αν δεν το έχεις στο .env
-with st.sidebar:
-    st.header("Ρυθμίσεις")
-    key_input = st.text_input("OpenAI API Key (προαιρετικό)", type="password")
-    if key_input:
-        openai.api_key = key_input
-    st.markdown("---")
-    st.write("Αν δεν υπάρχει API key, βάλε το σε .env ή στο πεδίο πάνω.")
 
 # Inputs UI
 product_name = st.text_input("Όνομα προϊόντος (π.χ. 'Γυναικεία μπλούζα μαύρη')", "")
