@@ -6,14 +6,16 @@ import streamlit as st
 import openai
 from dotenv import load_dotenv
 
-# Φόρτωση .env (αν τρεχεισ τοπικα) - στο Cloud αγνοειται
+# Φόρτωσε .env (αν τρεχεισ τοπικα) - στο Cloud αγνοειται
 load_dotenv()
 
-#Παιρνουμε το API key απο τα Secrets 
-OPENAI_KEY = os.getenv("OPEN_API_KEY")
+#Παρε το API key απο τα Secrets του Streamlit η το .env 
+OPENAI_KEY = st.secrets.get("OPENAI_API KEY") os.getenv("OPEN_API_KEY")
 
 if not api_key:
-    st.error("Το OpenAI API key δεν βρεθηκε.Βεβαιωσου οτι το εχεισ βαλει στα Secret.")
+    st.error("Το OpenAI API key δεν βρεθηκε.Βαλε το στα Streamlit Secrets για να τρεξει η εφαρμογη.")
+else:
+    client = OpenAI(api_key=api_key)
 # Αν θέλεις για δοκιμή μπορείς προσωρινά να βάλεις το key εδώ:
 # OPENAI_KEY = "sk-...το_δικό_σου_key..."
 
