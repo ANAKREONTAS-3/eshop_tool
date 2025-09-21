@@ -9,10 +9,10 @@ from dotenv import load_dotenv
 # Φόρτωσε .env (αν τρεχεισ τοπικα) - στο Cloud αγνοειται
 load_dotenv()
 
-#Παρε το API key απο τα Secrets του Streamlit η το .env 
+#Παρε το API key απο τα Secrets του Streamlit η .env 
 OPENAI_KEY = st.secrets.get("OPENAI_API KEY") os.getenv("OPEN_API_KEY")
 
-if not api_key:
+if not OPENAI_KEY:
     st.error("Το OpenAI API key δεν βρεθηκε.Βαλε το στα Streamlit Secrets για να τρεξει η εφαρμογη.")
 else:
     client = OpenAI(api_key=api_key)
